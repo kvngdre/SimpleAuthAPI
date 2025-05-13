@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../SimpleAuthAPI.Domain/SimpleAuthAPI.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

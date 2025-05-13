@@ -1,6 +1,7 @@
 using System;
+using SimpleAuthAPI.Domain.Entities;
 
-namespace SimpleAuthAPI.Domain.Users;
+namespace SimpleAuthAPI.Domain.Repositories;
 
 public interface IUserRepository
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace SimpleAuthAPI.Domain.Users;
+namespace SimpleAuthAPI.Domain.Entities;
 
 public class User
 {
