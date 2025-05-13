@@ -1,4 +1,4 @@
-namespace SimpleAuthAPI.Application.DTOs;
+namespace SimpleAuthAPI.Application.Abstractions.DTOs;
 
 public record class AuthenticationResult(bool Success,
                                          string Email,
