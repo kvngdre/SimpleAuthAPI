@@ -1,13 +1,23 @@
-﻿using SimpleAuthAPI.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleAuthAPI.Domain.Entities;
 using SimpleAuthAPI.Domain.Repositories;
+using SimpleAuthAPI.Infrastructure.Persistence.Database;
 
 namespace SimpleAuthAPI.Infrastructure.Persistence.Repositories;
 
 public class UserRepository : IUserRepository
 {
-  public Task DeleteUserAsync(User user)
+  private readonly ApplicationDbContext _dbContext;
+
+  public UserRepository(ApplicationDbContext dbContext)
   {
-    throw new NotImplementedException();
+    _dbContext = dbContext;
+  }
+
+  public async Task DeleteUserAsync(User user)
+  {
+    _dbContext.Users.Remove(user);
+    await _dbContext.SaveChangesAsync();
   }
 
   public Task<bool> EmailAlreadyExistsAsync(string email)
@@ -15,28 +25,34 @@ public class UserRepository : IUserRepository
     throw new NotImplementedException();
   }
 
-  public Task<IEnumerable<User>> FindAllUsersAsync()
+  public async Task<IEnumerable<User>> FindAllUsersAsync()
   {
-    throw new NotImplementedException();
+    return _dbContext.Users.ToList();
   }
 
   public Task<User?> FindUserByEmailAsync(string email)
   {
-    throw new NotImplementedException();
+    return _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
   }
 
-  public Task<User?> FindUserByIdAsync(Guid userid)
+  public async Task<User?> FindUserByIdAsync(Guid userId)
   {
-    throw new NotImplementedException();
+    return _dbContext.Users.Find(userId);
   }
 
-  public Task<User> InsertUserAsync(User user)
+  public async Task<User> InsertUserAsync(User user)
   {
-    throw new NotImplementedException();
+    _dbContext.Users.Add(user);
+    await _dbContext.SaveChangesAsync();
+
+    return user;
   }
 
-  public Task<User> UpdateUserAsync(User user)
+  public async Task<User> UpdateUserAsync(User user)
   {
-    throw new NotImplementedException();
+    _dbContext.Users.Update(user);
+    await _dbContext.SaveChangesAsync();
+
+    return user;
   }
 }
