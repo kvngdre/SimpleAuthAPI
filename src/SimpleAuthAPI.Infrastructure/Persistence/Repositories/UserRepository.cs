@@ -27,12 +27,12 @@ public class UserRepository : IUserRepository
 
   public async Task<IEnumerable<User>> FindAllUsersAsync()
   {
-    return _dbContext.Users.ToList();
+    return _dbContext.Users;
   }
 
   public Task<User?> FindUserByEmailAsync(string email)
   {
-    return _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+    return _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email);
   }
 
   public async Task<User?> FindUserByIdAsync(Guid userId)

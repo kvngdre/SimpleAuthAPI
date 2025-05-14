@@ -1,4 +1,3 @@
-using System;
 using SimpleAuthAPI.Application.Abstractions.DTOs;
 using SimpleAuthAPI.Application.Abstractions.Interfaces;
 using SimpleAuthAPI.Domain.Entities;
@@ -32,6 +31,8 @@ public class AuthService : IAuthService
       Email = request.Email,
       PasswordHash = _encryptionService.HashText(request.Password)
     };
+
+    await _userRepository.InsertUserAsync(user);
 
     return Result.Success(new AuthenticationResult(true, request.Email, "accessToken", "refreshToken"));
 
