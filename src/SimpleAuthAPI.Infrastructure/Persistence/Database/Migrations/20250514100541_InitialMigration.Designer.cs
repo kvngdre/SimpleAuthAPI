@@ -11,7 +11,7 @@ using SimpleAuthAPI.Infrastructure.Persistence.Database;
 namespace SimpleAuthAPI.Infrastructure.Persistence.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250513181358_InitialMigration")]
+    [Migration("20250514100541_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

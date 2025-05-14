@@ -17,4 +17,17 @@ public class Error(string code, string description) : IEquatable<Error>
   public override bool Equals(object? obj) => obj is Error error && Equals(error);
 
   public override int GetHashCode() => HashCode.Combine(Code, Description);
+
+  public static bool operator ==(Error? left, Error? right)
+  {
+    if (left is null && right is null) return true;
+
+    if (left is null || right is null) return false;
+
+    if (ReferenceEquals(left, right)) return true;
+
+    return left.Equals(right);
+  }
+
+  public static bool operator !=(Error? right, Error? left) => !(left == right);
 }

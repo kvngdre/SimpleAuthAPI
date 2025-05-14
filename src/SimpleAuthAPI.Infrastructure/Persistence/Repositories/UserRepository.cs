@@ -22,7 +22,7 @@ public class UserRepository : IUserRepository
 
   public Task<bool> EmailAlreadyExistsAsync(string email)
   {
-    throw new NotImplementedException();
+    return _dbContext.Users.AnyAsync(u => u.Email == email);
   }
 
   public async Task<IEnumerable<User>> FindAllUsersAsync()

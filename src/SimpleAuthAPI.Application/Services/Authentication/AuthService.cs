@@ -34,7 +34,7 @@ public class AuthService : IAuthService
 
     await _userRepository.InsertUserAsync(user);
 
-    return Result.Success(new AuthenticationResult(true, request.Email, "accessToken", "refreshToken"));
+    return Result.Success(new AuthenticationResult(user.Id, request.Email, "accessToken", "refreshToken"));
 
   }
 
