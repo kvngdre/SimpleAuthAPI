@@ -1,3 +1,4 @@
+using SimpleAuthAPI.API.Middleware;
 using SimpleAuthAPI.Application;
 using SimpleAuthAPI.Infrastructure;
 
@@ -24,6 +25,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+app.UseMiddleware<AuthMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

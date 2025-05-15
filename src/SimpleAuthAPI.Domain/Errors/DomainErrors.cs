@@ -22,6 +22,10 @@ public static class DomainErrors
       "Email.DuplicateEmail",
       "The provided email address already exists");
 
+    public static readonly Error UserNotFound = new(
+      "User.NotFound",
+      "User not found");
+
 
   }
 }

@@ -28,8 +28,8 @@ public static class InfrastructureDependencyInjection
 
   public static IServiceCollection AddAuth(this IServiceCollection services, ConfigurationManager configurationManager)
   {
-    services.Configure<JwtSettings>(configurationManager.GetSection(JwtSettings.SectionName));
     var jwtSettings = configurationManager.GetSection(JwtSettings.SectionName).Get<JwtSettings>()!;
+    services.Configure<JwtSettings>(configurationManager.GetSection(JwtSettings.SectionName));
     services.AddSingleton<IJwtService, JwtService>();
 
     services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
