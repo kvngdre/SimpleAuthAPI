@@ -4,7 +4,7 @@ using SimpleAuthAPI.Domain.Shared;
 
 namespace SimpleAuthAPI.Application.Abstractions.Interfaces;
 
-public interface IAuthenticationService
+public interface IAuthService
 {
   Task<Result<AuthenticationResult>> RegisterAsync(RegisterRequest request);
   Task<Result<AuthenticationResult>> LoginAsync(LoginRequest request);

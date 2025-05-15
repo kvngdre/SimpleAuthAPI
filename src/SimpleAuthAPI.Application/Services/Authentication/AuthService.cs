@@ -7,13 +7,13 @@ using SimpleAuthAPI.Domain.Shared;
 
 namespace SimpleAuthAPI.Application.Services.Authentication;
 
-public class AuthenticationService : IAuthenticationService
+public class AuthService : IAuthService
 {
   private readonly IUserRepository _userRepository;
   private readonly IEncryptionService _encryptionService;
   public readonly IJwtService _jwtService;
 
-  public AuthenticationService(IUserRepository userRepository,
+  public AuthService(IUserRepository userRepository,
                                IEncryptionService encryptionService,
                                IJwtService jwtService)
   {

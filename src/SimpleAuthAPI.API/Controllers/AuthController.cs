@@ -7,11 +7,11 @@ namespace SimpleAuthAPI.API.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthController : ControllerBase
     {
-        private readonly IAuthenticationService _authService;
+        private readonly IAuthService _authService;
 
-        public AuthenticationController(IAuthenticationService authService)
+        public AuthController(IAuthService authService)
         {
             _authService = authService;
         }
