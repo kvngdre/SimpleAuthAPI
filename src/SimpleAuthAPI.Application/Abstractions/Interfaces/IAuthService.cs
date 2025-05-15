@@ -4,9 +4,9 @@ using SimpleAuthAPI.Domain.Shared;
 
 namespace SimpleAuthAPI.Application.Abstractions.Interfaces;
 
-public interface IAuthService
+public interface IAuthenticationService
 {
   Task<Result<AuthenticationResult>> RegisterAsync(RegisterRequest request);
-  Task<AuthenticationResult> LoginAsync(LoginRequest request);
+  Task<Result<AuthenticationResult>> LoginAsync(LoginRequest request);
   Task<bool> ValidateTokenAsync(string token);
 }

@@ -15,12 +15,12 @@ public class UserService : IUserService
     _userRepository = userRepository;
   }
 
-  public async Task<Result<List<UserResponse>>> GetAllUsersAsync()
+  public async Task<Result<List<UserResult>>> GetAllUsersAsync()
   {
     IEnumerable<User> users = await _userRepository.FindAllUsersAsync();
 
-    List<UserResponse> userResponses = [.. users.Select(u => new UserResponse(u.Id, u.Email, u.CreatedAt, u.LastLoginAt))];
+    List<UserResult> userResponses = [.. users.Select(u => new UserResult(u.Id, u.Email, u.CreatedAt, u.LastLoginAt))];
 
-    return Result.Success(userResponses);
+    return Result.Success("Fetched all users", userResponses);
   }
 }

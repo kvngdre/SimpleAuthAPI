@@ -6,5 +6,5 @@ namespace SimpleAuthAPI.Application.Abstractions.Interfaces;
 
 public interface IUserService
 {
-  Task<Result<List<UserResponse>>> GetAllUsersAsync();
+  Task<Result<List<UserResult>>> GetAllUsersAsync();
 }

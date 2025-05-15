@@ -10,7 +10,7 @@ public static class ApplicationDependencyInJection
 {
   public static IServiceCollection AddApplicationServices(this IServiceCollection services)
   {
-    services.AddScoped<IAuthService, AuthService>();
+    services.AddScoped<IAuthenticationService, AuthenticationService>();
     services.AddScoped<IUserService, UserService>();
 
     return services;
