@@ -11,11 +11,15 @@ public class AuthenticationService : IAuthenticationService
 {
   private readonly IUserRepository _userRepository;
   private readonly IEncryptionService _encryptionService;
+  public readonly IJwtService _jwtService;
 
-  public AuthenticationService(IUserRepository userRepository, IEncryptionService encryptionService)
+  public AuthenticationService(IUserRepository userRepository,
+                               IEncryptionService encryptionService,
+                               IJwtService jwtService)
   {
     _userRepository = userRepository;
     _encryptionService = encryptionService;
+    _jwtService = jwtService;
   }
 
 
@@ -54,9 +58,11 @@ public class AuthenticationService : IAuthenticationService
       return Result.Failure<AuthenticationResult>(DomainErrors.AuthenticationErrors.InvalidCredentials);
     }
 
+    var token = _jwtService.GenerateToken(user);
+
     // Return successful result
     return Result.Success("Login successful",
-      new AuthenticationResult(user.Id, user.Email));
+      new AuthenticationResult(user.Id, user.Email, token));
   }
 
   public Task<bool> ValidateTokenAsync(string token)
