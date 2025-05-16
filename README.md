@@ -9,6 +9,7 @@ A .NET-based authentication API implementing clean architecture principles with 
 - Onion Architecture implementation
 - Entity Framework Core with SQLite
 - Swagger/OpenAPI documentation
+- Docker support
 
 ## Project Structure
 
@@ -25,8 +26,11 @@ SimpleAuthAPI/
 
 - .NET 8.0 SDK
 - Visual Studio Code or any preferred IDE
+- Docker (optional)
 
 ## Getting Started
+
+### Running Locally
 
 1. Clone the repository
 
@@ -54,12 +58,21 @@ dotnet ef database update
 dotnet run
 ```
 
+### Running with Docker
+
+1. Build and run using Docker Compose
+
+```bash
+docker build -t simpleauthapi .
+docker run -p 5195:8080 simpleauthapi
+```
+
 The API will be available at:
 
-- HTTP: http://localhost:5000
+- HTTP: http://localhost:5195
 - HTTPS: https://localhost:5001
-- Swagger UI: https://localhost:5001/swagger
-- [Postman Collection]("https://documenter.getpostman.com/view/22366860/2sB2qUp5nn)
+- Swagger UI: http://localhost:5195/swagger
+- [Postman Documentation](https://documenter.getpostman.com/view/22366860/2sB2qUp5nn)
 
 ## API Endpoints
 
@@ -87,6 +100,12 @@ To run in development mode with hot reload:
 
 ```bash
 dotnet watch run
+```
+
+For Docker development:
+
+```bash
+docker-compose up --build
 ```
 
 ## License
