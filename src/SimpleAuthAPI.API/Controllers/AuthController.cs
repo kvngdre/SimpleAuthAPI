@@ -1,3 +1,7 @@
+using System.Net;
+using System.Text;
+using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SimpleAuthAPI.API.Shared;
 using SimpleAuthAPI.Application.Abstractions.DTOs;
@@ -34,6 +38,26 @@ namespace SimpleAuthAPI.API.Controllers
             if (result.IsFailure) return BadRequest(ApiResponse<AuthenticationResult>.CreateFailure(result.Error));
 
             return Ok(ApiResponse<AuthenticationResult>.CreateSuccess(result.Value, result.Message));
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task GetAuthenticatedUser()
+        {
+            HttpContext context = HttpContext;
+            context.Items.TryGetValue("AuthenticatedUser", out dynamic? user);
+            var u = context.User;
+            Console.WriteLine(u.Claims);
+            foreach (var item in u.Claims)
+            {
+                System.Console.WriteLine(item);
+            }
+
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
+            await context.Response.WriteAsJsonAsync(new { userId = "user!.UserId", email = "user.Email" });
         }
     }
 }

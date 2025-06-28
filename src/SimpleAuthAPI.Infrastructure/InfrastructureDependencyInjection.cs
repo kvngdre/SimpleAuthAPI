@@ -19,7 +19,7 @@ public static class InfrastructureDependencyInjection
   {
     services.AddAuth(configurationManager);
 
-    services.AddScoped<ApplicationDbContext>();
+    services.AddDbContext<ApplicationDbContext>();
     services.AddScoped<IUserRepository, UserRepository>();
     services.AddSingleton<IEncryptionService, EncryptionService>();
 
@@ -28,9 +28,10 @@ public static class InfrastructureDependencyInjection
 
   public static IServiceCollection AddAuth(this IServiceCollection services, ConfigurationManager configurationManager)
   {
-    var jwtSettings = configurationManager.GetSection(JwtSettings.SectionName).Get<JwtSettings>()!;
     services.Configure<JwtSettings>(configurationManager.GetSection(JwtSettings.SectionName));
     services.AddSingleton<IJwtService, JwtService>();
+
+    JwtSettings jwtSettings = configurationManager.GetSection(JwtSettings.SectionName).Get<JwtSettings>()!;
 
     services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -43,10 +44,7 @@ public static class InfrastructureDependencyInjection
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = jwtSettings.Issuer,
                 ValidAudience = jwtSettings.Audience,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                          Encoding.UTF8.GetBytes(jwtSettings.Secret)
-                      )
-
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret))
               };
             });
 

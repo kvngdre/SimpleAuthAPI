@@ -58,6 +58,9 @@ public class AuthService : IAuthService
       return Result.Failure<AuthenticationResult>(DomainErrors.AuthenticationErrors.InvalidCredentials);
     }
 
+    user.LastLoginAt = DateTime.UtcNow;
+    await _userRepository.UpdateUserAsync(user);
+
     var token = _jwtService.GenerateToken(user);
 
     // Return successful result

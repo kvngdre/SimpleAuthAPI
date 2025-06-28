@@ -6,10 +6,7 @@ namespace SimpleAuthAPI.Infrastructure.Services;
 
 public class EncryptionService : IEncryptionService
 {
-  public string HashText(string text)
-  {
-    return BCrypt.Net.BCrypt.HashPassword(text);
-  }
+  public string HashText(string text) => BCrypt.Net.BCrypt.HashPassword(text);
 
   public bool VerifyHash(string text, string hashedText)
   {

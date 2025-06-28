@@ -24,8 +24,8 @@ public class JwtService : IJwtService
       {
             new (JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new (JwtRegisteredClaimNames.Email, user.Email),
-            new (JwtRegisteredClaimNames.Iss, _jwtSettings.Issuer),
-            new (JwtRegisteredClaimNames.Aud, _jwtSettings.Audience),
+            // new (JwtRegisteredClaimNames.Iss, _jwtSettings.Issuer),
+            // new (JwtRegisteredClaimNames.Aud, _jwtSettings.Audience),
             new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new (JwtRegisteredClaimNames.UniqueName, user.Id.ToString())
       };
@@ -37,7 +37,7 @@ public class JwtService : IJwtService
            _jwtSettings.Issuer,
             _jwtSettings.Audience,
             claims,
-            expires: DateTime.UtcNow.AddDays(_jwtSettings.ExpiryMinutes),
+            expires: DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiryMinutes),
             signingCredentials: signingCredentials);
 
     return new JwtSecurityTokenHandler().WriteToken(securityToken);

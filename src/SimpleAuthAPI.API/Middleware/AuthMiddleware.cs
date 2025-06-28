@@ -17,7 +17,7 @@ public class AuthMiddleware
 
   public async Task InvokeAsync(HttpContext context)
   {
-    var token = context.Request.Headers.Authorization.FirstOrDefault()?.Split(" ").Last();
+    string? token = context.Request.Headers.Authorization.FirstOrDefault()?.Split(" ").Last();
 
     if (token != null)
     {
